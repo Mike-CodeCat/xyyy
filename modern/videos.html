@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>今日热门 · 讯影影音</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="bg-plain">
+  <header class="topbar">
+    <a class="brand" href="index.html"><span>讯影</span>影音</a>
+    <div class="spacer"></div>
+    <a class="legacy-link" href="../twicepage.html">⏪ 查看原版</a>
+  </header>
+
+  <main>
+    <h2 class="section-title">🔥 今日热门</h2>
+    <div class="grid" id="grid"></div>
+  </main>
+
+  <footer>讯影影音 · 2022 初版 · 2026 重制</footer>
+
+  <dialog id="player">
+    <video controls playsinline preload="metadata"></video>
+    <div class="dialog-body">
+      <h3></h3>
+      <button class="btn" id="follow">＋ 关注Ta</button>
+      <button class="btn ghost" id="close">关闭</button>
+    </div>
+  </dialog>
+
+  <script src="app.js"></script>
+  <script>
+    // 原版的三个视频（1.html / 2.html / 3.html）合进一页，点卡片弹窗播放
+    const videos = [
+      { title: '后来所有的恶意都找到了原因 但我们无法回到过去', author: 'Ethereal', type: '过去', src: '../1.mp4', cover: 'img/cover-1.webp' },
+      { title: '历史是一堆灰烬，但灰烬深处有余温', author: '浮梦', type: '演奏', src: '../2.mp4', cover: 'img/cover-2.webp' },
+      { title: '去更远的地方 见更亮的光', author: '浮梦', type: '风景', src: '../3.mp4', cover: 'img/cover-3.webp' },
+    ];
+
+    const grid = document.getElementById('grid');
+    const player = document.getElementById('player');
+    const video = player.querySelector('video');
+    const follow = document.getElementById('follow');
+    let current;
+
+    videos.forEach((v) => {
+      const card = document.createElement('button');
+      card.className = 'video-card';
+      card.innerHTML = `
+        <div class="thumb"><img loading="lazy" alt=""><span class="play">▶</span></div>
+        <div class="info"><h3></h3>
+          <div class="tags"><span class="tag"></span><span>@${v.author}</span><span>2022-10-28</span></div>
+        </div>`;
+      card.querySelector('img').src = v.cover;
+      card.querySelector('h3').textContent = v.title;
+      card.querySelector('.tag').textContent = v.type;
+      card.onclick = () => open(v);
+      grid.append(card);
+    });
+
+    function open(v) {
+      current = v;
+      video.src = v.src;
+      video.poster = v.cover;
+      player.querySelector('h3').textContent = v.title;
+      follow.textContent = '＋ 关注 ' + v.author;
+      player.showModal();
+      video.play().catch(() => {});
+    }
+
+    player.addEventListener('close', () => { video.pause(); video.removeAttribute('src'); video.load(); });
+    document.getElementById('close').onclick = () => player.close();
+    // 点弹窗外面的遮罩也能关
+    player.addEventListener('click', (e) => { if (e.target === player) player.close(); });
+
+    follow.onclick = () => toast('关注功能正在开发中，暂未开放');
+  </script>
+</body>
+</html>

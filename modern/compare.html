@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>时代的碰撞 · 讯影影音</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    main { max-width: 1100px; }
+    .intro { text-align: center; margin-bottom: 28px; }
+    .intro h1 { font-size: clamp(24px, 5vw, 34px); }
+    .intro p { color: var(--muted); }
+    .pair { display: flex; gap: 32px; justify-content: center; flex-wrap: wrap; }
+    figure { text-align: center; }
+    figcaption { margin-top: 12px; color: var(--muted); font-size: 14px; }
+    figcaption b { color: var(--text); }
+    .phone {
+      width: 320px;
+      max-width: calc(100vw - 32px);
+      height: 640px;
+      border: 10px solid #222;
+      border-radius: 36px;
+      overflow: hidden;
+      background: #000;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, .5);
+    }
+    .phone.new { border-image: none; border-color: transparent;
+      background: linear-gradient(#000, #000) padding-box, var(--legacy-gradient) border-box;
+      background-size: 100% 100%, 400% 400%; animation: flow 10s ease infinite; }
+    .phone iframe { width: 100%; height: 100%; border: 0; display: block; }
+  </style>
+</head>
+<body class="bg-plain">
+  <header class="topbar">
+    <a class="brand" href="index.html"><span>讯影</span>影音</a>
+  </header>
+
+  <main>
+    <div class="intro">
+      <h1>时代的碰撞</h1>
+      <p>左边是第一次学 HTML 时写的，右边是重制版。两边都能点。</p>
+    </div>
+    <div class="pair">
+      <figure>
+        <div class="phone"><iframe src="../index.html" title="2022 原版"></iframe></div>
+        <figcaption><b>2022</b> · 原版 v1.2.1</figcaption>
+      </figure>
+      <figure>
+        <div class="phone new"><iframe src="index.html" title="2026 现代版"></iframe></div>
+        <figcaption><b>2026</b> · 现代版 v2.0.0</figcaption>
+      </figure>
+    </div>
+  </main>
+</body>
+</html>

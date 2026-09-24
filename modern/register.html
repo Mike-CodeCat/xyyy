@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>注册 · 讯影影音</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="bg-register">
+  <header class="topbar">
+    <a class="back" href="index.html">← 返回</a>
+    <div class="spacer"></div>
+    <a class="legacy-link" href="../first%20time.html">⏪ 查看原版</a>
+  </header>
+
+  <main class="center">
+    <form class="card" id="register" novalidate>
+      <h1 id="title">注册新账号</h1>
+      <p>输入手机号和验证码即可</p>
+
+      <label class="field">
+        <span>手机号</span>
+        <input id="phone" type="tel" inputmode="numeric" maxlength="11" placeholder="11 位手机号">
+      </label>
+      <div class="row">
+        <label class="field">
+          <span>验证码</span>
+          <input id="code" inputmode="numeric" placeholder="看右边的图">
+        </label>
+        <img class="captcha" src="../u_1070984255_945844267&amp;fm_253&amp;fmt_auto&amp;app_138&amp;f_PNG.png" alt="验证码图片">
+      </div>
+
+      <button class="btn block primary" type="submit" style="margin-top:24px">确认</button>
+      <p class="hint">已有账号？<a href="login.html">去登录</a></p>
+    </form>
+  </main>
+
+  <script src="app.js"></script>
+  <script>
+    if (new URLSearchParams(location.search).get('mode') === 'reset') {
+      document.getElementById('title').textContent = '找回密码';
+      document.title = '找回密码 · 讯影影音';
+    }
+
+    document.getElementById('register').onsubmit = (e) => {
+      e.preventDefault();
+      const phone = document.getElementById('phone').value.trim();
+      if (!/^1\d{10}$/.test(phone)) return toast('请输入正确的 11 位手机号');
+      if (!document.getElementById('code').value.trim()) return toast('请填写验证码');
+
+      showDialog('成功！', '您的账号：123456，您的密码：123456', [
+        { label: '前往登录', onClick: () => location.href = 'login.html' },
+      ]);
+    };
+  </script>
+</body>
+</html>
