@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>关于我们 · 讯影影音</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="bg-home">
+  <header class="topbar">
+    <a class="back" href="index.html">← 返回</a>
+    <div class="spacer"></div>
+    <a class="legacy-link" href="../About%20us.html">⏪ 查看原版</a>
+  </header>
+
+  <main class="center">
+    <section class="card">
+      <h1>关于我们</h1>
+      <p>我是一个个人开发者（来自云千机工作室），刚学编程没多久，现在正在一点点成长。</p>
+      <p>在程序中可能会遇到很多错误，您可以通过 QQ 群向我反映遇到的问题，感谢您的支持。</p>
+
+      <nav class="menu">
+        <button class="btn primary" id="qq">加入 QQ 群 756237504</button>
+      </nav>
+    </section>
+  </main>
+
+  <script src="app.js"></script>
+  <script>
+    const GROUP = '756237504';
+    // App 里直接跳 QQ 群；浏览器里复制群号
+    document.getElementById('qq').onclick = async () => {
+      if (window.wc?.goQQGroup) return wc.goQQGroup(GROUP);
+      try {
+        await navigator.clipboard.writeText(GROUP);
+        toast('群号已复制，去 QQ 里搜索加入吧');
+      } catch {
+        toast('QQ 群号：' + GROUP);
+      }
+    };
+  </script>
+</body>
+</html>

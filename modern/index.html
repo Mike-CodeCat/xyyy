@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>讯影影音</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="bg-home">
+  <header class="topbar">
+    <a class="brand" href="index.html"><span>讯影</span>影音</a>
+    <div class="spacer"></div>
+    <a class="legacy-link" href="../index.html" title="回到 2022 年">⏪ 查看原版</a>
+  </header>
+
+  <main class="center">
+    <section class="card">
+      <p class="quote">人生天地之间，<br>若白驹之过隙，<br>忽然而已。</p>
+      <p class="subtitle">—— 庄子 · 知北游</p>
+
+      <nav class="menu">
+        <a class="btn primary" href="login.html">登录</a>
+        <button class="btn" id="guest">游客模式</button>
+        <a class="btn" href="register.html">注册账号</a>
+        <a class="btn" href="register.html?mode=reset">忘记密码</a>
+        <a class="btn" href="about.html">关于我们</a>
+        <a class="btn" href="terms.html">用户协议</a>
+        <button class="btn" id="update">检查更新</button>
+        <button class="btn ghost" id="exit">退出</button>
+      </nav>
+    </section>
+  </main>
+
+  <footer>讯影影音 · 2022 初版 · 2026 重制 · <a href="compare.html" style="color:inherit">看看时代的碰撞 →</a></footer>
+
+  <script src="app.js"></script>
+  <script>
+    document.getElementById('guest').onclick = () =>
+      showDialog('游客模式', '游客模式下账号信息不会保存，并且通道随时可能关闭，建议注册账号后登录。', [
+        { label: '去注册', ghost: true, onClick: () => location.href = 'register.html' },
+        { label: '继续逛逛', onClick: () => location.href = 'videos.html' },
+      ]);
+
+    document.getElementById('update').onclick = () =>
+      showDialog('已是最新版本 v2.0.0', '从 1.2.1 一路走到现在：全新毛玻璃界面、弹窗播放、手机适配，以及更轻的图片。原版依然保留在右上角，随时可以回去看看。');
+
+    // 原版在 WebCat 打包的 App 里用 wc.exit() 退出；浏览器里就给个提示
+    document.getElementById('exit').onclick = () =>
+      window.wc?.exit ? wc.exit() : toast('浏览器里关掉这个标签页就好啦 👋');
+  </script>
+</body>
+</html>

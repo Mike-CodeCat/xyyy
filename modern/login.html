@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>登录 · 讯影影音</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="bg-login">
+  <header class="topbar">
+    <a class="back" href="index.html">← 返回</a>
+    <div class="spacer"></div>
+    <a class="legacy-link" href="../dl.html">⏪ 查看原版</a>
+  </header>
+
+  <main class="center">
+    <form class="card" id="login" novalidate>
+      <h1>欢迎回来</h1>
+      <p>钱塘江上潮信来，今日方知我是我</p>
+
+      <label class="field">
+        <span>账号</span>
+        <input id="user" autocomplete="username" inputmode="numeric" placeholder="请输入账号" required>
+      </label>
+      <label class="field">
+        <span>密码</span>
+        <input id="pwd" type="password" autocomplete="current-password" placeholder="请输入密码" required>
+      </label>
+
+      <label class="check">
+        <input type="checkbox" id="agree">
+        我已阅读并同意 <a href="terms.html">用户协议</a>
+      </label>
+
+      <button class="btn block primary" type="submit">登录</button>
+      <p class="hint">还没有账号？<a href="register.html">去注册</a></p>
+    </form>
+  </main>
+
+  <script src="app.js"></script>
+  <script>
+    document.getElementById('login').onsubmit = (e) => {
+      e.preventDefault();
+      const user = document.getElementById('user').value.trim();
+      const pwd = document.getElementById('pwd').value;
+
+      if (!user || !pwd) return toast('账号和密码都要填哦');
+      if (!document.getElementById('agree').checked) return toast('请先勾选同意用户协议');
+
+      // 和原版一样的测试账号：123456 / 123456
+      if (user === '123456' && pwd === '123456') {
+        toast('登录成功！');
+        setTimeout(() => location.href = 'videos.html', 700);
+      } else {
+        toast('账号或密码错误');
+      }
+    };
+  </script>
+</body>
+</html>
